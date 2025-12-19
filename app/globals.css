@@ -324,3 +324,61 @@
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+/* d */
+.partners {
+  padding: 80px 0;
+  text-align: center;
+}
+
+.partners-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
+/* container */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* track */
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  width: max-content;
+
+  animation: marquee 25s linear infinite;
+}
+
+/* logos */
+.marquee-track img {
+  height: 50px;
+  /* opacity: 0.45; */
+  /* filter: grayscale(100%); */
+  transition: all 0.35s ease;
+}
+
+.marquee-track img:hover {
+  opacity: 1;
+  filter: grayscale(0);
+  transform: scale(1.05);
+}
+
+/* animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* optional: pause on hover */
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
