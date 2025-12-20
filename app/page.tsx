@@ -9,17 +9,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Image from "next/image";
 
 export default function KuickHackLandingPage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [cookieAccepted, setCookieAccepted] = useState(false);
   const logos = [
     "https://banki.tj/Content/logo/orionbank.png",
-    "https://vdushanbe.ru/wp-content/uploads/Alif_ru.png",
+    "https://it-park.tj/wp-content/uploads/2025/03/alif-tech.png",
     "https://laklakmarket.tj/uploads/all/7mm0HfD0X5A8w91xscfaC6GunQPdP0Ll1b28rkqT.png",
-    "/partners/whatsapp.svg",
-    "/partners/stripe.svg",
-    "/partners/paypal.svg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpNzCYn-SOFLque9taT_UwYdRpkwJrCEBnbQ&s",
+    "https://upload.wikimedia.org/wikipedia/commons/5/57/UNICEF_Logo.png",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYeoFykku9zIG1Hq_weECBL5JqDfiRTWMyA&s",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSZ9QGNp0toW6tTAccB7uoz_4eNs3i6v9lXQ&s",
   ];
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -774,11 +776,19 @@ export default function KuickHackLandingPage() {
               {
                 name: "Хушанг Мирзо",
                 role: "Совладелец FootballPro, TopManager.ai, iProxy, Push.Express, RentAcc, организатор хакатонов",
+                image:"../images/khushang.jpg"
               },
             ].map((person, index) => (
               <Card key={index} className="bg-white border-gray-200">
                 <CardContent className="p-6 text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 bg-gray-200 rounded-full" />
+                  <div className="w-32 h-32 mx-auto mb-4 bg-gray-200 rounded-full">
+                    <img
+                      className="w-32 h-32 mx-auto mb-4 rounded-full"
+                      src={person.image}
+                      alt="icon"
+                    />
+                  </div>
+
                   <h3 className="text-xl font-bold mb-2">
                     {person.name.split(" ")[0]}
                     <br />
@@ -791,7 +801,7 @@ export default function KuickHackLandingPage() {
                   </p>
                   {person.chairman && (
                     <p className="text-xs text-purple-600 mt-2">
-                      председатель жюри
+                      {/* председатель жюри */}
                     </p>
                   )}
                 </CardContent>

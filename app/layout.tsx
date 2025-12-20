@@ -10,7 +10,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "BuildWithAi",
   description:
-    "IT-хакатон в Казахстане, 28 апреля - 5 мая 2025. Призовой фонд ₸1 800 000. Марғұлан Университет.",
+    "IT-хакатон BuildWithAi",
   generator: "v0.app",
   icons: {
     icon: [
