@@ -279,12 +279,12 @@ export default function KuickHackLandingPage() {
             </div>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-bold mb-8 text-balance animate-slide-up">
+          <h1 className="text-4xl md:text-8xl font-bold mb-8  text-balance animate-slide-up">
             <span className="text-gray-900">{"{"}</span>
             <span className="text-gray-900">Build </span>
             <span className="text-gray-900">With AI</span>
             <span className="text-gray-900">{"} "}</span>
-            <sup className="text-4xl md:text-2xl align-super">2026</sup>
+            <sup className="text-xl md:text-2xl align-super">2026</sup>
           </h1>
 
           {/* Dates */}
