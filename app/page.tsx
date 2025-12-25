@@ -44,7 +44,9 @@ const items = [
     "https://upload.wikimedia.org/wikipedia/commons/5/57/UNICEF_Logo.png",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMYeoFykku9zIG1Hq_weECBL5JqDfiRTWMyA&s",
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSZ9QGNp0toW6tTAccB7uoz_4eNs3i6v9lXQ&s",
+    "https://yora.tj/_next/image?url=%2Flogo.webp&w=384&q=75",
     "https://cdn.stepik.net/media/cache/images/courses/128731/cover_f61hZEg/9ae47ad6d4c068af31b8a494c0397d54.jpg",
+
   ];
 
 
