@@ -8,12 +8,13 @@ import {
   AlertCircle,
   ExternalLink,
   FileText,
+  Info,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 /* ================= STYLES ================= */
 
-// Updated: text-base prevents zoom on iOS inputs. Adjusted padding/rounding for mobile.
 const INPUT_CLASS =
   "w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3.5 text-base outline-none focus:border-purple-500 focus:bg-white focus:ring-4 focus:ring-purple-100 transition-all placeholder:text-gray-400";
 const LABEL_CLASS = "block mb-2 text-sm font-semibold text-gray-700";
@@ -37,8 +38,127 @@ type Member = {
 type Stage = {
   id: string;
   content: string;
-  pdfUrl: string; // frontend only
+  pdfUrl: string;
 };
+
+type CaseDetail = {
+  title: string;
+  organizer: string;
+  problem: string;
+  goal: string;
+  features: string[];
+  constraints?: string[];
+};
+
+/* ================= DATA (FROM CONTEXT) ================= */
+
+const CASE_DETAILS: CaseDetail[] = [
+  {
+    title: "AI Listing Studio (Somon.tj)",
+    organizer: "Somon.tj",
+    problem:
+      "Создание объявлений занимает много времени, часто они неполные или неконсистентные, что снижает вовлеченность.",
+    goal: "Разработать AI-помощника для быстрого и качественного создания объявлений (Недвижимость, Авто, Товары).",
+    features: [
+      "Vision: Извлечение характеристик из фото",
+      "AI-копирайтер: Генерация заголовков и описаний",
+      "Фото-коуч: Рекомендации по качеству фото",
+      "Чеклист готовности к публикации",
+    ],
+    constraints: [
+      "Не угадывать личные данные",
+      "Не менять цены и не давать обещаний",
+    ],
+  },
+  {
+    title: "Smart Deposit Challenge",
+    organizer: "Orienbank",
+    problem:
+      "Банковские калькуляторы скучные и не объясняют выгоду понятным языком.",
+    goal: "Создать умного финансового помощника, который помогает выбрать стратегию накопления и объясняет расчеты.",
+    features: [
+      "Поддержка 3 типов вкладов (классический, с капитализацией, лестничный)",
+      "AI объясняет разницу и дает рекомендации",
+      "Визуализация выгоды",
+    ],
+    constraints: [
+      "AI не считает проценты (это делает бэкенд), а только объясняет",
+    ],
+  },
+  {
+    title: "LakLak AI Assistant",
+    organizer: "LakLak Marketplace",
+    problem: "Нагрузка на саппорт и низкая конверсия оплат заказов.",
+    goal: "Виртуальный ассистент для автоматизации поддержки и помощи в завершении заказов.",
+    features: [
+      "Статус заказа и оплаты (после верификации)",
+      "Напоминание о неоплаченных заказах",
+      "Гид по доставке и правилам",
+      "Ответы на FAQ",
+    ],
+    constraints: [
+      "Языки: Русский и Таджикский",
+      "Никаких выдумок, только данные маркетплейса",
+    ],
+  },
+  {
+    title: "Прогнозирование оттока студентов",
+    organizer: "Softclub CRM",
+    problem: "Администраторы узнают об уходе студента слишком поздно.",
+    goal: "AI-модуль, прогнозирующий риск ухода и рекомендующий действия.",
+    features: [
+      "ML-модель оценки риска (Низкий/Средний/Высокий)",
+      "LLM для объяснения причин риска",
+      "Рекомендации (звонок, встреча, напоминание)",
+    ],
+  },
+  {
+    title: "AI-модуль отбора наставников",
+    organizer: "Softclub CRM",
+    problem:
+      "Сложно быстро проверить тех. уровень и педагогические навыки ментора.",
+    goal: "Модуль для стандартизированного тестирования и оценки менторов.",
+    features: [
+      "Проверка кода и теоретических знаний",
+      "Оценка умения объяснять (Teaching skill)",
+      "Автоматический отчет с рекомендацией (Green/Yellow/Red)",
+    ],
+  },
+  {
+    title: "Интеллектуальный подбор клиентов",
+    organizer: "Yora.tj",
+    problem: "Низкая конверсия и долгий ручной подбор клиентов.",
+    goal: "AI-модуль для повышения конверсии и релевантности предложений.",
+    features: [
+      "Scoring модель релевантности (0-100)",
+      "Объяснение, почему клиент подходит",
+      "Рекомендация действия (письмо, звонок)",
+    ],
+  },
+  {
+    title: "AI Factoring Assistant",
+    organizer: "Orienbank",
+    problem: "Предприниматели не понимают факторинг и считают его сложным.",
+    goal: "Чат-бот, который объясняет факторинг и рассчитывает условия.",
+    features: [
+      "Онбординг и расчет комиссии в чате",
+      "Простой скоринг (Зеленый/Желтый/Красный)",
+      "Объяснение условий простым языком",
+    ],
+    constraints: ["Использовать фиктивные данные", "Без сложных интеграций"],
+  },
+  {
+    title: "Оценка стоимости жилья",
+    organizer: "Alif Tech",
+    problem: "Сложно определить адекватную рыночную цену квартиры.",
+    goal: "ML-модель для предсказания цены на основе объявлений.",
+    features: [
+      "Предобработка данных (Somon.tj)",
+      "Регрессионные модели (Linear, Random Forest, etc.)",
+      "Анализ влияния признаков на цену",
+    ],
+  },
+];
 
 /* ================= HELPERS ================= */
 
@@ -76,7 +196,7 @@ const CASES: Omit<Stage, "content">[] = [
   { id: "case8", pdfUrl: "/pdf/case8.pdf" },
 ];
 
-/* ================= PAGE COMPONENT ================= */
+/* ================= COMPONENT ================= */
 
 export default function RegistrationPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -94,6 +214,9 @@ export default function RegistrationPage() {
   const [stages, setStages] = useState<Stage[]>(
     CASES.map((c) => ({ ...c, content: "" }))
   );
+
+  // Modal State
+  const [activeCaseIndex, setActiveCaseIndex] = useState<number | null>(null);
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -188,7 +311,7 @@ export default function RegistrationPage() {
 
       const data = await response.text();
 
-      if (!response.ok) throw new Error(data || "Request failed");
+      if (!response.ok) throw new Error(data || "Ошибка запроса");
 
       setIsSubmitted(true);
       window.scrollTo(0, 0);
@@ -233,8 +356,96 @@ export default function RegistrationPage() {
   /* ================= FORM SCREEN ================= */
 
   return (
-    // UPDATED: Padding reduction for mobile (px-3)
-    <section className="min-h-screen bg-[#FFF7EF] py-6 px-3 md:py-20 md:px-6">
+    <section className="min-h-screen bg-[#FFF7EF] py-6 px-3 md:py-20 md:px-6 relative">
+      {/* --- MODAL OVERLAY --- */}
+      {activeCaseIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+          onClick={() => setActiveCaseIndex(null)}
+        >
+          <div
+            className="bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl p-6 md:p-10 relative animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setActiveCaseIndex(null)}
+              className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors text-gray-600"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Modal Content */}
+            <div className="space-y-6">
+              <div>
+                <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-bold tracking-wide mb-2">
+                  CASE #{activeCaseIndex + 1}
+                </span>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">
+                  {CASE_DETAILS[activeCaseIndex].title}
+                </h2>
+                <p className="text-gray-500 font-medium mt-1">
+                  Организатор:{" "}
+                  <span className="text-gray-800">
+                    {CASE_DETAILS[activeCaseIndex].organizer}
+                  </span>
+                </p>
+              </div>
+
+              <div className="space-y-4 text-sm md:text-base text-gray-700">
+                <div className="bg-red-50 p-4 rounded-2xl border border-red-100">
+                  <h4 className="font-bold text-red-800 mb-1 flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4" /> Проблема
+                  </h4>
+                  <p>{CASE_DETAILS[activeCaseIndex].problem}</p>
+                </div>
+
+                <div className="bg-green-50 p-4 rounded-2xl border border-green-100">
+                  <h4 className="font-bold text-green-800 mb-1 flex items-center gap-2">
+                    <Check className="w-4 h-4" /> Цель
+                  </h4>
+                  <p>{CASE_DETAILS[activeCaseIndex].goal}</p>
+                </div>
+
+                <div>
+                  <h4 className="font-bold text-gray-900 mb-2">
+                    Ключевые функции (Features):
+                  </h4>
+                  <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                    {CASE_DETAILS[activeCaseIndex].features.map((feat, idx) => (
+                      <li key={idx}>{feat}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                {CASE_DETAILS[activeCaseIndex].constraints && (
+                  <div>
+                    <h4 className="font-bold text-gray-900 mb-2">
+                      Ограничения / Важно:
+                    </h4>
+                    <ul className="list-disc pl-5 space-y-1 text-gray-600">
+                      {CASE_DETAILS[activeCaseIndex].constraints?.map(
+                        (con, idx) => (
+                          <li key={idx}>{con}</li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-gray-100">
+                <Button
+                  onClick={() => setActiveCaseIndex(null)}
+                  className="w-full bg-gray-900 text-white hover:bg-gray-800 rounded-xl py-6"
+                >
+                  Понятно, закрыть
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Alert Banner */}
       {isRegistrationClosed() && (
         <div className="max-w-4xl mx-auto mb-6 rounded-2xl border border-red-200 bg-red-50 p-4 flex items-center gap-3 text-red-700 shadow-sm">
@@ -247,7 +458,6 @@ export default function RegistrationPage() {
 
       {!isRegistrationClosed() && (
         <div className="max-w-4xl mx-auto bg-white rounded-[1.5rem] md:rounded-[2.5rem] shadow-xl shadow-purple-900/5 overflow-hidden">
-          {/* UPDATED: Padding reduction inside card (p-5 for mobile) */}
           <div className="p-5 md:p-12">
             {/* Header */}
             <div className="mb-8 md:mb-12">
@@ -278,13 +488,13 @@ export default function RegistrationPage() {
               </div>
             )}
 
-            {/* GLOBAL INFO - UPDATED: Gap adjusted */}
+            {/* GLOBAL INFO */}
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-10">
               <div>
                 <label className={LABEL_CLASS}>Название команды</label>
                 <input
                   className={INPUT_CLASS}
-                  placeholder="Dream Team"
+                  placeholder="Название команды"
                   value={teamName}
                   onChange={(e) => setTeamName(e.target.value)}
                 />
@@ -317,7 +527,6 @@ export default function RegistrationPage() {
               {members.map((m, i) => (
                 <div
                   key={i}
-                  // UPDATED: Padding reduction for mobile card
                   className="rounded-2xl border border-gray-100 bg-white p-4 md:p-8 shadow-sm"
                 >
                   <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
@@ -327,7 +536,7 @@ export default function RegistrationPage() {
                     <span className="text-gray-900">Участник</span>
                     {m.isCapitan && (
                       <span className="rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-bold text-purple-700 uppercase tracking-wide ml-auto md:ml-0">
-                        Captain
+                        Капитан
                       </span>
                     )}
                   </h3>
@@ -411,11 +620,9 @@ export default function RegistrationPage() {
                 Кейсы + PDF
               </h2>
               <p className="text-gray-500 text-sm mb-8 leading-relaxed">
-                Барои ҳар кейс PDF-ро кушо ва ҷавобро навис.
-                <span className="block mt-1 text-xs text-purple-600 md:hidden">
-                  (Агар PDF дар телефон хуб натобад, тугмаи "Кушодан"-ро зер
-                  кунед)
-                </span>
+                Напишите решение для каждого кейса. Вы можете открыть PDF или
+                нажать кнопку «Подробнее», чтобы прочитать информацию прямо
+                здесь.
               </p>
 
               <div className="space-y-8">
@@ -424,51 +631,53 @@ export default function RegistrationPage() {
                     key={s.id}
                     className="rounded-2xl border border-gray-100 bg-white p-4 md:p-6 shadow-sm overflow-hidden"
                   >
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    {/* Header Row: Title and Buttons */}
+                    <div className="flex flex-col gap-4 mb-5">
                       <div className="flex items-center gap-2">
                         <div className="bg-purple-50 p-2 rounded-lg text-purple-600">
                           <FileText className="w-5 h-5" />
                         </div>
                         <label className="text-base font-bold text-gray-800">
-                          Кейс #{i + 1}
+                          Кейс #{i + 1}:{" "}
+                          <span className="font-normal text-gray-600">
+                            {CASE_DETAILS[i]?.title}
+                          </span>
                         </label>
                       </div>
 
-                      {/* Responsive Button for Mobile */}
-                      <a
-                        href={s.pdfUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gray-50 text-gray-700 text-sm font-medium hover:bg-gray-100 hover:text-purple-600 transition-colors border border-gray-200 w-full sm:w-auto"
-                      >
-                        <span>Кушодан дар саҳифаи нав</span>
-                        <ExternalLink className="h-3.5 w-3.5" />
-                      </a>
-                    </div>
+                      <div className="flex flex-wrap gap-2">
+                        {/* Modal Trigger Button */}
+                        <button
+                          type="button"
+                          onClick={() => setActiveCaseIndex(i)}
+                          className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-purple-50 text-purple-700 text-sm font-medium hover:bg-purple-100 transition-colors border border-purple-100"
+                        >
+                          <Info className="h-4 w-4" />
+                          <span>Подробнее</span>
+                        </button>
 
-                    {/* UPDATED PDF IFRAME:
-                        1. increased height for mobile (500px)
-                        2. Added min-w-0 to prevent overflow
-                        3. Added background to hide loading states
-                    */}
-                    <div className="relative w-full h-[500px] md:h-[600px] rounded-xl border border-gray-200 mb-5 bg-gray-50 overflow-hidden">
-                      <iframe
-                        src={s.pdfUrl}
-                        className="w-full h-full object-cover"
-                        title={`Case ${i + 1}`}
-                        loading="lazy"
-                      />
+                        {/* PDF Button */}
+                        <a
+                          href={s.pdfUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gray-50 text-gray-700 text-sm font-medium hover:bg-gray-100 hover:text-purple-600 transition-colors border border-gray-200"
+                        >
+                          <span>Открыть PDF</span>
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      </div>
                     </div>
 
                     <div className="space-y-2">
                       <label className="text-sm font-semibold text-gray-700 ml-1">
-                        Варианти ҷавоб:
+                        Ваше решение:
                       </label>
                       <textarea
                         className={`${INPUT_CLASS} min-h-[140px] text-base leading-relaxed`}
-                        placeholder={`Ҷавоби худро барои кейси ${
+                        placeholder={`Напишите ваше решение для кейса ${
                           i + 1
-                        } дар инҷо нависед...`}
+                        } здесь...`}
                         value={s.content}
                         onChange={(e) => updateStage(i, e.target.value)}
                       />
