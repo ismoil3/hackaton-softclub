@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "3 января 2026",
     "4 января 2026",
     "SoftClub",
-    "KuickTech",
+   
     "менторство",
     "прототип",
     "стартап",
