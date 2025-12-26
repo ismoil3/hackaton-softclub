@@ -921,7 +921,7 @@ export default function KuickHackLandingPage() {
             {juryMembers.map((person, index) => (
               <div key={index} className="group relative">
                 {/* Image Container - Vertical Rectangle */}
-                <div className="relative h-80 w-full overflow-hidden rounded-2xl shadow-lg">
+                <div className="relative h-100 w-full overflow-hidden rounded-2xl shadow-lg">
                   <img
                     src={person.image}
                     alt={person.name}
@@ -940,24 +940,23 @@ export default function KuickHackLandingPage() {
                         '<span class="text-4xl text-gray-300 font-bold">?</span>';
                     }}
                   />
-                  {/* Gradient Overlay for Text Readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
+                  {/* Modern Gradient Overlay (Always visible but darker on hover) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
 
-                  {/* Text overlay positioned on the image */}
-                  <div className="absolute bottom-0 left-0 w-full p-6 text-white translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="text-xl font-bold leading-tight mb-2">
-                      {person.name}
-                    </h3>
-                    <div className="h-1 w-10 bg-purple-500 rounded mb-2"></div>
+                  {/* Floating Info Card - Premium Dark Glass */}
+                  <div className="absolute bottom-4 inset-x-4 p-5 translate-y-2 group-hover:translate-y-0 transition-all duration-300 backdrop-blur-xl bg-black/40 rounded-2xl border border-white/10 shadow-lg shadow-black/20">
+                    <div className="border-l-4 border-purple-500 pl-4">
+                      <h3 className="text-xl font-bold text-white mb-1">
+                        {person.name}
+                      </h3>
+                      <p className="text-purple-200 text-[12px] font-medium  uppercase opacity-90">
+                        {person.role}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
-                {/* Role Text (Outside image for readability) */}
-                <div className="mt-4 px-2">
-                  <p className="text-sm text-gray-600 leading-relaxed font-medium">
-                    {person.role}
-                  </p>
-                </div>
+
               </div>
             ))}
           </div>
