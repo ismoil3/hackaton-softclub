@@ -1,17 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
+  AlertCircle,
   ArrowLeft,
   Check,
-  AlertCircle,
   ExternalLink,
   FileText,
   Info,
   X,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 /* ================= STYLES ================= */
 
@@ -303,13 +303,13 @@ export default function RegistrationPage() {
       name: teamName,
       count,
       members,
-      stages: stages.map((s) => ({  content: s.content })),
+      stages: stages.map((s) => ({ content: s.content })),
     };
 
     setSubmitting(true);
 
     try {
-      const response = await fetch("http://37.27.29.18:8087/api/teems", {
+      const response = await fetch("https://hackaton-api.softclub.tj/api/teems", {
         method: "POST",
         headers: {
           Accept: "text/plain",
@@ -703,9 +703,8 @@ export default function RegistrationPage() {
                       </label>
                       <textarea
                         className={`${INPUT_CLASS} min-h-[140px] text-base leading-relaxed`}
-                        placeholder={`Напишите ваше решение для кейса ${
-                          i + 1
-                        } здесь...`}
+                        placeholder={`Напишите ваше решение для кейса ${i + 1
+                          } здесь...`}
                         value={s.content}
                         onChange={(e) => updateStage(i, e.target.value)}
                       />
