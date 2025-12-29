@@ -658,7 +658,7 @@ export default function RegistrationPage() {
                     </label>
                     <input
                       className={INPUT_CLASS}
-                      placeholder="Сможете ли быть онлайн?..."
+                      placeholder="Сможете ли быть оффлайн?..."
                       value={m.fullTimeParticipationNote}
                       onChange={(e) =>
                         updateMember(
