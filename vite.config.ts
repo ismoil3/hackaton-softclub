@@ -17,8 +17,6 @@ export default defineConfig({
         start_url: "/",
         scope: "/",
         display: "standalone",
-        background_color: "#000000",
-        theme_color: "#6d28d9",
         description: "Build with AI — hackathon by Oriyonbonk and Softclub",
         icons: [
           {
