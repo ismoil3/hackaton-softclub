@@ -20,12 +20,12 @@ export default defineConfig({
         description: "Build with AI — hackathon by Oriyonbonk and Softclub",
         icons: [
           {
-            src: "/pwa-192x192.png",
+            src: "/favicon.svg",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "/pwa-512x512.png",
+            src: "/favicon.svg",
             sizes: "512x512",
             type: "image/png",
           },
