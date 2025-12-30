@@ -25,7 +25,7 @@ const speakers: Speaker[] = [
     name: "Собир Бобиев",
     role: "Senior Data Scientist",
     company: "Alif | ex-Yandex",
-    image: "/sobir.jpg",
+    image: "/sobir1.jpg",
     label: "mentor",
   },
   {
