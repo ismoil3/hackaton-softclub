@@ -1,5 +1,5 @@
-import React from "react";
 import { ArrowRight, Terminal, UserPlus, Users } from "lucide-react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const Hero: React.FC = () => {
@@ -146,7 +146,7 @@ const Hero: React.FC = () => {
 
               {/* SoftClub */}
               <img
-                src="https://www.softclub.tj/logo-softclub.svg"
+                src="/logo-softclub.svg"
                 alt="SoftClub"
                 className="h-4 sm:h-5 md:h-6 lg:h-8 w-auto brightness-0 invert"
               />
